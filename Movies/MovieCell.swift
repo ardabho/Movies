@@ -8,20 +8,28 @@
 import UIKit
 
 class MovieCell: UITableViewCell {
-
-    @IBOutlet weak var poster: UIImageView!
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var overview: UILabel!
+    
+    @IBOutlet weak private var poster: UIImageView!
+    @IBOutlet weak private var title: UILabel!
+    @IBOutlet weak private var overview: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        }
-
+    }
+    
     func setUpCell(movie: Results) {
-        //poster image load
+        
+        if let imageUrl = URL(string: "https://image.tmdb.org/t/p/w500/\(movie.poster_path)") {
+            if let imageData = try? Data(contentsOf: imageUrl) {
+                if let image = UIImage(data: imageData) {
+                    poster.image = image
+                }
+            }
+        }
+        
         title.text = movie.title
         overview.text = movie.overview
     }
-
+    
 }

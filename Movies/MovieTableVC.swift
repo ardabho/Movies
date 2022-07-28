@@ -9,17 +9,19 @@ import UIKit
 
 class MovieTableVC: UITableViewController {
     
-    var movies: [Results]!
+    var movies = [Results]()
     var apiKey = "4ef04d6dfd0046f70e881d4423868e5b"
-    var dataLoaded = false
+    var dataLoaded = false // set to true when data is loaded
+    var pageNumber = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        fetchMovies()
+        title = "Popular Movies"
+        fetchMovies(page: pageNumber)
     }
     
-    func fetchMovies() {
-        guard let url = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey)&language=en-US&page=1") else {fatalError("Cant convert to url")}
+    func fetchMovies(page: Int) {
+                guard let url = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey)&language=en-US&page=\(page)") else {fatalError("Cant convert to url")}
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
@@ -28,21 +30,25 @@ class MovieTableVC: UITableViewController {
             }
             
             if let data = data {
-                let decoder = JSONDecoder()
-                
-                if let fetchedMovies = try? decoder.decode(Movie.self, from: data) {
-                    self.movies = fetchedMovies.results
-                    
-                    self.dataLoaded = true
-                    
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }
+                self.decodeJson(data: data)
             }
         }
         
         task.resume()
+    }
+    
+    func decodeJson(data: Data) {
+        let decoder = JSONDecoder()
+        
+        if let fetchedMovies = try? decoder.decode(Movie.self, from: data) {
+            self.movies.append(contentsOf: fetchedMovies.results)
+            
+            self.dataLoaded = true
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     
@@ -70,6 +76,16 @@ class MovieTableVC: UITableViewController {
         //if data is not loaded
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath)
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastElement = movies.count - 1
+        
+        //If user reached bottom of page, load more items
+        if indexPath.row == lastElement {
+            pageNumber += 1
+            fetchMovies(page: pageNumber)
+        }
     }
     
 }
