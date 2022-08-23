@@ -88,4 +88,11 @@ class MovieTableVC: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "DetailView") as? MovieDetailVC {
+        vc.movie = movies[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
 }
