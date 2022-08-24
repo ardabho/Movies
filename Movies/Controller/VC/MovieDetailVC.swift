@@ -17,8 +17,6 @@ class MovieDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        poster.layer.cornerRadius = 20
-        
         loadElements(with: movie)
         
     }

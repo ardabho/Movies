@@ -13,6 +13,8 @@ class MovieCell: UITableViewCell {
     @IBOutlet weak private var title: UILabel!
     @IBOutlet weak private var overview: UILabel!
     
+    var screenWidth = UIScreen.main.bounds.width - 40
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -28,6 +30,7 @@ class MovieCell: UITableViewCell {
             }
         }
         
+        poster.layer.cornerRadius = 20
         title.text = movie.title
         overview.text = movie.overview
     }

@@ -78,6 +78,7 @@ class MovieTableVC: UITableViewController {
         return cell
     }
     
+    
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastElement = movies.count - 1
         
