@@ -12,69 +12,32 @@ private let reuseIdentifier = "Cell"
 class MovieCollectionVC: UICollectionViewController {
 
     var movies = [Results]()
-    var apiKey = "4ef04d6dfd0046f70e881d4423868e5b"
-    var dataLoaded = false // set to true when data is loaded
     var pageNumber = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "In Theaters"
-        
-        fetchMovies(page: pageNumber)
-        
-    }
-    
-    func fetchMovies(page: Int) {
-                guard let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)&language=en-US&page=\(page)") else {fatalError("Cant convert to url")}
-        
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            
-            if let data = data {
-                self.decodeJson(data: data)
-            }
-        }
-        
-        task.resume()
-    }
-    
-    func decodeJson(data: Data) {
-        let decoder = JSONDecoder()
-        
-        if let fetchedMovies = try? decoder.decode(Movie.self, from: data) {
-            self.movies.append(contentsOf: fetchedMovies.results)
-            
-            self.dataLoaded = true
-            
+        Network.shared.fetchMovies(page: pageNumber, category: categories.nowPlaying.rawValue) { results in
+            self.movies = results
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
         }
     }
     
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if dataLoaded {
             return movies.count
-        } else {
-            return 0
-        }
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as? MovieCollectionCell {
             cell.setUpCell(movie: movies[indexPath.row])
-            cell.backgroundColor = .systemGray
+            cell.backgroundColor = .systemGray4
             cell.layer.cornerRadius = 20
             
             return cell
         }
-    
-        
     
         return UICollectionViewCell()
     }
@@ -85,4 +48,5 @@ class MovieCollectionVC: UICollectionViewController {
         navigationController?.pushViewController(vc, animated: true)
         }
     }
+    
 }

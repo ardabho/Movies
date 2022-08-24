@@ -78,21 +78,20 @@
         <!--Movie CollectionVC-->
         <scene sceneID="peN-ol-mH7">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="f7e-PE-oLM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <collectionViewController id="gqI-va-WzW" customClass="MovieCollectionVC" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="UeY-HK-xY1">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Fhn-sE-3qZ">
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="20" minimumInteritemSpacing="20" id="Fhn-sE-3qZ">
                             <size key="itemSize" width="150" height="200"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+                            <inset key="sectionInset" minX="20" minY="10" maxX="20" maxY="10"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionCell" id="Y3c-kp-163" customClass="MovieCollectionCell" customModule="Movies" customModuleProvider="target">
-                                <rect key="frame" x="10" y="10" width="160" height="280"/>
+                                <rect key="frame" x="20" y="10" width="160" height="280"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="jQc-6q-kGf">
                                     <rect key="frame" x="0.0" y="0.0" width="160" height="280"/>
@@ -136,6 +135,7 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="qbT-Yo-ZLG"/>
                 </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f7e-PE-oLM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2467" y="827"/>
         </scene>
@@ -231,6 +231,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="4XS-dQ-YNn" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RoA-Jf-bnA">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>

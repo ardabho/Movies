@@ -10,40 +10,14 @@ import UIKit
 class MovieTableVC: UITableViewController {
     
     var movies = [Results]()
-    var apiKey = "4ef04d6dfd0046f70e881d4423868e5b"
-    var dataLoaded = false // set to true when data is loaded
     var pageNumber = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Popular Movies"
-        fetchMovies(page: pageNumber)
-    }
-    
-    func fetchMovies(page: Int) {
-                guard let url = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey)&language=en-US&page=\(page)") else {fatalError("Cant convert to url")}
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            
-            if let data = data {
-                self.decodeJson(data: data)
-            }
-        }
-        
-        task.resume()
-    }
-    
-    func decodeJson(data: Data) {
-        let decoder = JSONDecoder()
-        
-        if let fetchedMovies = try? decoder.decode(Movie.self, from: data) {
-            self.movies.append(contentsOf: fetchedMovies.results)
-            
-            self.dataLoaded = true
+        Network.shared.fetchMovies(page: pageNumber, category: categories.popular.rawValue) { results in
+            self.movies = results
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -56,27 +30,18 @@ class MovieTableVC: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if dataLoaded {
-            return movies.count
-        } else {
-            return 0
-        }
-        
+        return movies.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if dataLoaded {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as? MovieCell {
-                cell.setUpCell(movie: movies[indexPath.row])
-                return cell
-            }
-        }
         
-        //if data is not loaded
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath)
-        return cell
-    }
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as? MovieCell {
+            cell.setUpCell(movie: movies[indexPath.row])
+            return cell
+        }
+        return UITableViewCell()
+}
     
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -85,14 +50,21 @@ class MovieTableVC: UITableViewController {
         //If user reached bottom of page, load more items
         if indexPath.row == lastElement {
             pageNumber += 1
-            fetchMovies(page: pageNumber)
+            Network.shared.fetchMovies(page: pageNumber, category: categories.popular.rawValue) { results in
+                self.movies.append(contentsOf: results)
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
+            }
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "DetailView") as? MovieDetailVC {
-        vc.movie = movies[indexPath.row]
-        navigationController?.pushViewController(vc, animated: true)
+            vc.movie = movies[indexPath.row]
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     

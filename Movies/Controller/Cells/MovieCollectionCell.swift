@@ -14,14 +14,8 @@ class MovieCollectionCell: UICollectionViewCell {
     
     func setUpCell(movie: Results) {
         
-        if let imageUrl = URL(string: "https://image.tmdb.org/t/p/w500/\(movie.poster_path)") {
-            if let imageData = try? Data(contentsOf: imageUrl) {
-                if let image = UIImage(data: imageData) {
-                    posterImage.image = image
-                }
-            }
-        }
-        posterImage.layer.cornerRadius = 20
+        posterImage.image = Network.shared.getImage(path: movie.poster_path)
+        posterImage.layer.cornerRadius = 10
         titleLabel.text = movie.title
     }
 

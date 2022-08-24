@@ -26,20 +26,10 @@ class MovieDetailVC: UIViewController {
             return
         }
         
-        if let imageUrl = URL(string: "https://image.tmdb.org/t/p/w500/\(movie.poster_path)") {
-            if let imageData = try? Data(contentsOf: imageUrl) {
-                if let image = UIImage(data: imageData) {
-                    poster.image = image
-                }
-            }
-        }
-        
+        poster.image = Network.shared.getImage(path: movie.poster_path)
         titleLabel.text = movie.title
         overviewLabel.text = movie.overview
         
     }
-    
-    
-    
     
 }
