@@ -16,7 +16,7 @@ class MovieTableVC: UITableViewController {
         super.viewDidLoad()
         title = "Popular Movies"
         
-        Network.shared.fetchMovies(page: pageNumber, category: categories.popular.rawValue) { results in
+        Network.shared.fetchData(page: pageNumber, contentType: "movie" , category: categories.popular.rawValue) { results in
             self.movies = results
             
             DispatchQueue.main.async {
@@ -50,7 +50,7 @@ class MovieTableVC: UITableViewController {
         //If user reached bottom of page, load more items
         if indexPath.row == lastElement {
             pageNumber += 1
-            Network.shared.fetchMovies(page: pageNumber, category: categories.popular.rawValue) { results in
+            Network.shared.fetchData(page: pageNumber, contentType: "movie" , category: categories.popular.rawValue) { results in
                 self.movies.append(contentsOf: results)
                 
                 DispatchQueue.main.async {

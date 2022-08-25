@@ -18,7 +18,7 @@ class MovieCollectionVC: UICollectionViewController {
         super.viewDidLoad()
         
         title = "In Theaters"
-        Network.shared.fetchMovies(page: pageNumber, category: categories.nowPlaying.rawValue) { results in
+        Network.shared.fetchData(page: pageNumber, contentType: "movie" ,category: categories.nowPlaying.rawValue) { results in
             self.movies = results
             DispatchQueue.main.async {
                 self.collectionView.reloadData()

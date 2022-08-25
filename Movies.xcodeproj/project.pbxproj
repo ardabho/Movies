@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7707B8A428B7953800E33683 /* TvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7707B8A328B7953800E33683 /* TvCell.swift */; };
+		7707B8A628B7976F00E33683 /* TV_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7707B8A528B7976F00E33683 /* TV_VC.swift */; };
+		7707B8A828B7991100E33683 /* TvSerie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7707B8A728B7991100E33683 /* TvSerie.swift */; };
 		7732881C289286AA00ACC1A0 /* MovieTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7732881B289286AA00ACC1A0 /* MovieTableVC.swift */; };
 		7732881E289286DE00ACC1A0 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7732881D289286DE00ACC1A0 /* Movie.swift */; };
 		7739EB9328B52BB7008471DA /* MovieDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739EB9228B52BB7008471DA /* MovieDetailVC.swift */; };
@@ -22,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7707B8A328B7953800E33683 /* TvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TvCell.swift; path = Movies/Controller/Cells/TvCell.swift; sourceTree = SOURCE_ROOT; };
+		7707B8A528B7976F00E33683 /* TV_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TV_VC.swift; path = Movies/Controller/VC/TV_VC.swift; sourceTree = SOURCE_ROOT; };
+		7707B8A728B7991100E33683 /* TvSerie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvSerie.swift; sourceTree = "<group>"; };
 		7732881B289286AA00ACC1A0 /* MovieTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableVC.swift; sourceTree = "<group>"; };
 		7732881D289286DE00ACC1A0 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		7739EB9228B52BB7008471DA /* MovieDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailVC.swift; sourceTree = "<group>"; };
@@ -63,6 +69,7 @@
 			children = (
 				77705D7528B668C600BA3F37 /* Network.swift */,
 				7732881D289286DE00ACC1A0 /* Movie.swift */,
+				7707B8A728B7991100E33683 /* TvSerie.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -79,6 +86,7 @@
 		773A74B228B6322A00D00AC7 /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				7707B8A528B7976F00E33683 /* TV_VC.swift */,
 				7732881B289286AA00ACC1A0 /* MovieTableVC.swift */,
 				7739EB9228B52BB7008471DA /* MovieDetailVC.swift */,
 				773A74B028B62E0C00D00AC7 /* MovieCollectionVC.swift */,
@@ -89,6 +97,7 @@
 		773A74B328B6323200D00AC7 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				7707B8A328B7953800E33683 /* TvCell.swift */,
 				77BCC4D728929EC0007F0C23 /* MovieCell.swift */,
 				773A74AE28B62D4A00D00AC7 /* MovieCollectionCell.swift */,
 			);
@@ -201,9 +210,12 @@
 				7732881E289286DE00ACC1A0 /* Movie.swift in Sources */,
 				773A74AF28B62D4A00D00AC7 /* MovieCollectionCell.swift in Sources */,
 				77BCC4D828929EC0007F0C23 /* MovieCell.swift in Sources */,
+				7707B8A628B7976F00E33683 /* TV_VC.swift in Sources */,
 				77705D7628B668C600BA3F37 /* Network.swift in Sources */,
 				7739EB9328B52BB7008471DA /* MovieDetailVC.swift in Sources */,
+				7707B8A428B7953800E33683 /* TvCell.swift in Sources */,
 				778835A4288B2BF6009B8E61 /* SceneDelegate.swift in Sources */,
+				7707B8A828B7991100E33683 /* TvSerie.swift in Sources */,
 				773A74B128B62E0C00D00AC7 /* MovieCollectionVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
